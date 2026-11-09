@@ -1,0 +1,10 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+const allowed=['Category','Tag','Merchant','FinancialAccount','Transaction','TransactionTag','Transfer','BalanceAdjustment','MatchedTransfer','Budget','WorkspacePreference','AutomationSource','AutomationEvent','RecurringSchedule','RecurringOccurrence','TransactionSplit','MonthlyPlan','FinanceRule','StatementImport','RuleRun'];
+const source=await readFile('prisma/schema.prisma','utf8');
+const blocks=[...source.matchAll(/model\s+(\w+)\s*\{([\s\S]*?)\n\}/g)];
+const names=new Set(blocks.map(m=>m[1]));
+const models=allowed.map(name=>{const block=blocks.find(m=>m[1]===name);if(!block)throw new Error(`Missing backup model ${name}`);const fields=[];for(const line of block[2].split(/\r?\n/)){const match=/^\s*(\w+)\s+(\w+)(\[\]|\?)?/.exec(line);if(!match||names.has(match[2])||match[1]==='userId')continue;if(!['String','Boolean','Int','BigInt','DateTime','Json','Float'].includes(match[2]))throw new Error(`Unsupported scalar ${match[2]}`);fields.push({name:match[1],type:match[2],list:match[3]==='[]',nullable:match[3]==='?'});}return{name,delegate:name[0].toLowerCase()+name.slice(1),fields};});
+const version=createHash('sha256').update(JSON.stringify(models)).digest('hex');
+await writeFile('lib/backup-models.json',JSON.stringify({version,models},null,2)+'\n');
+console.log(`Generated strict backup field registry for ${models.length} owned models; credentials excluded.`);

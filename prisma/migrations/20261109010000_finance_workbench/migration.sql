@@ -1,0 +1,16 @@
+ALTER TABLE "Transfer" ADD COLUMN "toDate" TEXT;
+CREATE TABLE "BalanceAdjustment" ("userId" TEXT NOT NULL, "id" TEXT NOT NULL, "accountId" TEXT NOT NULL, "date" TEXT NOT NULL, "poisha" BIGINT NOT NULL, "balancePoisha" BIGINT NOT NULL, "description" TEXT NOT NULL, CONSTRAINT "BalanceAdjustment_pkey" PRIMARY KEY ("userId","id"));
+ALTER TABLE "BalanceAdjustment" ADD CONSTRAINT "BalanceAdjustment_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+CREATE TABLE "MatchedTransfer" ("userId" TEXT NOT NULL, "id" TEXT NOT NULL, "transferId" TEXT NOT NULL, "outgoing" JSONB NOT NULL, "incoming" JSONB NOT NULL, CONSTRAINT "MatchedTransfer_pkey" PRIMARY KEY ("userId","id"));
+ALTER TABLE "MatchedTransfer" ADD CONSTRAINT "MatchedTransfer_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+CREATE TABLE "FinanceRule" ("userId" TEXT NOT NULL, "id" TEXT NOT NULL, "name" TEXT NOT NULL, "active" BOOLEAN NOT NULL DEFAULT true, "priority" INTEGER NOT NULL, "conditions" JSONB NOT NULL, "actions" JSONB NOT NULL, CONSTRAINT "FinanceRule_pkey" PRIMARY KEY ("userId","id"));
+ALTER TABLE "FinanceRule" ADD CONSTRAINT "FinanceRule_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+CREATE TABLE "StatementImport" ("userId" TEXT NOT NULL, "id" TEXT NOT NULL, "accountId" TEXT NOT NULL, "name" TEXT NOT NULL, "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP, "rows" JSONB NOT NULL, "closingDate" TEXT, "closingBalancePoisha" BIGINT, CONSTRAINT "StatementImport_pkey" PRIMARY KEY ("userId","id"));
+ALTER TABLE "StatementImport" ADD CONSTRAINT "StatementImport_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+CREATE TABLE "RuleRun" ("userId" TEXT NOT NULL, "id" TEXT NOT NULL, "ruleId" TEXT NOT NULL, "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP, "matchedCount" INTEGER NOT NULL, "changedIds" TEXT[], CONSTRAINT "RuleRun_pkey" PRIMARY KEY ("userId","id"));
+ALTER TABLE "RuleRun" ADD CONSTRAINT "RuleRun_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "BalanceAdjustment" ADD CONSTRAINT "BalanceAdjustment_userId_accountId_fkey" FOREIGN KEY ("userId","accountId") REFERENCES "FinancialAccount"("userId","id") ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE "StatementImport" ADD CONSTRAINT "StatementImport_userId_accountId_fkey" FOREIGN KEY ("userId","accountId") REFERENCES "FinancialAccount"("userId","id") ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE "RuleRun" ADD CONSTRAINT "RuleRun_userId_ruleId_fkey" FOREIGN KEY ("userId","ruleId") REFERENCES "FinanceRule"("userId","id") ON DELETE NO ACTION ON UPDATE CASCADE;
+CREATE UNIQUE INDEX "BalanceAdjustment_userId_accountId_date_key" ON "BalanceAdjustment"("userId","accountId","date");
+CREATE UNIQUE INDEX "MatchedTransfer_userId_transferId_key" ON "MatchedTransfer"("userId","transferId");

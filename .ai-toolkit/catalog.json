@@ -1,0 +1,77 @@
+{
+  "toolkitVersion": "0.4.0",
+  "source": "https://github.com/creativekamrul/ai-dev-toolkit",
+  "skills": [
+    {
+      "id": "block-testing-strategy",
+      "name": "block-testing-strategy",
+      "description": "Choose behavior-focused unit, integration and browser checks using the project's actual stack and test commands.",
+      "category": "testing",
+      "compatibility": [
+        "portable-format; tools-may-vary"
+      ],
+      "validation": {
+        "status": "reviewed",
+        "executableReview": "no-executables",
+        "compatibility": "YAML format checked; runtime and behavior not certified"
+      }
+    },
+    {
+      "id": "design-foundations",
+      "name": "design-foundations",
+      "description": "Turn a selected visual style into a usable design system, responsive layout and component states without prescribing a single aesthetic.",
+      "category": "design",
+      "compatibility": [
+        "codex",
+        "goose",
+        "portable",
+        "claude"
+      ],
+      "validation": {
+        "status": "reviewed",
+        "executableReview": "no-executables",
+        "compatibility": "portable instructions; native team dispatch depends on host"
+      }
+    },
+    {
+      "id": "frontend-implementation",
+      "name": "frontend-implementation",
+      "description": "Implement React or Next.js state, rendering and interaction boundaries while preserving the project's design contract.",
+      "category": "frontend",
+      "compatibility": [
+        "codex",
+        "goose",
+        "portable",
+        "claude"
+      ],
+      "validation": {
+        "status": "reviewed",
+        "executableReview": "no-executables",
+        "compatibility": "portable instructions; native team dispatch depends on host"
+      }
+    }
+  ],
+  "selectionReasons": [
+    {
+      "id": "block-testing-strategy",
+      "reasons": [
+        "capability: testing"
+      ]
+    },
+    {
+      "id": "design-foundations",
+      "reasons": [
+        "styles: glassmorphism"
+      ]
+    },
+    {
+      "id": "frontend-implementation",
+      "reasons": [
+        "presets: nextjs"
+      ]
+    }
+  ],
+  "harness": "codex",
+  "skillDirectory": ".agents/skills",
+  "searchCommand": "From the central checkout: python toolkit.py search <topic> --limit 8"
+}

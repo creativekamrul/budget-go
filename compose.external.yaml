@@ -1,0 +1,29 @@
+name: budget-go-external
+
+x-app: &app
+  image: ${BUDGET_GO_IMAGE:-ghcr.io/creativekamrul/budget-go:1.0.0-beta.1}
+  build:
+    context: .
+    dockerfile: Dockerfile
+  environment:
+    NODE_ENV: production
+    APP_URL: ${APP_URL:?Set APP_URL to the exact public origin}
+    AUTH_URL: ${APP_URL:?Set APP_URL to the exact public origin}
+    AUTH_SECRET: ${AUTH_SECRET:?Generate a private AUTH_SECRET}
+    DATABASE_URL: ${DATABASE_URL:?Set the external PostgreSQL connection URL}
+  init: true
+  security_opt:
+    - no-new-privileges:true
+
+services:
+  app:
+    <<: *app
+    ports:
+      - '${BIND_ADDRESS:-127.0.0.1}:${APP_PORT:-3000}:3000'
+    restart: unless-stopped
+
+  migrate:
+    <<: *app
+    command: [npm, run, db:migrate]
+    profiles: [tools]
+    restart: 'no'

@@ -1,0 +1,24 @@
+.ai-toolkit/history/
+.ai-toolkit/operation.lock
+node_modules/
+.next/
+generated/prisma/
+out/
+.npm-cache/
+.playwright/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.env*
+!.env.example
+!.env.docker.example
+!.env.external.example
+# Local acceptance evidence can include private screenshots and financial records.
+artifacts/
+site-dist/
+_site/
+backups/
+*.dump
+*.sql.gz
+*.log
+.ai-toolkit/history/

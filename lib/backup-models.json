@@ -1,0 +1,827 @@
+{
+  "version": "d628375ddc01c34c12fe5ae00b1d4aa07c83241e94e1020bf93ebecf3a35f1dc",
+  "models": [
+    {
+      "name": "Category",
+      "delegate": "category",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "color",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "icon",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "parentId",
+          "type": "String",
+          "list": false,
+          "nullable": true
+        },
+        {
+          "name": "kind",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "archived",
+          "type": "Boolean",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "Tag",
+      "delegate": "tag",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "color",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "archived",
+          "type": "Boolean",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "Merchant",
+      "delegate": "merchant",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "color",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "website",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "archived",
+          "type": "Boolean",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "FinancialAccount",
+      "delegate": "financialAccount",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "kind",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "currency",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "openingDate",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "openingPoisha",
+          "type": "BigInt",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "archived",
+          "type": "Boolean",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "Transaction",
+      "delegate": "transaction",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "category",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "date",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "type",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "poisha",
+          "type": "BigInt",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "list": false,
+          "nullable": true
+        },
+        {
+          "name": "categoryId",
+          "type": "String",
+          "list": false,
+          "nullable": true
+        },
+        {
+          "name": "merchantId",
+          "type": "String",
+          "list": false,
+          "nullable": true
+        },
+        {
+          "name": "notes",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "status",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "excluded",
+          "type": "Boolean",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "TransactionTag",
+      "delegate": "transactionTag",
+      "fields": [
+        {
+          "name": "transactionId",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "tagId",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "Transfer",
+      "delegate": "transfer",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "fromAccountId",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "toAccountId",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "date",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "toDate",
+          "type": "String",
+          "list": false,
+          "nullable": true
+        },
+        {
+          "name": "poisha",
+          "type": "BigInt",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "BalanceAdjustment",
+      "delegate": "balanceAdjustment",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "date",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "poisha",
+          "type": "BigInt",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "balancePoisha",
+          "type": "BigInt",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "MatchedTransfer",
+      "delegate": "matchedTransfer",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "transferId",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "outgoing",
+          "type": "Json",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "incoming",
+          "type": "Json",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "Budget",
+      "delegate": "budget",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "month",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "category",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "limitPoisha",
+          "type": "BigInt",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "categoryId",
+          "type": "String",
+          "list": false,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "WorkspacePreference",
+      "delegate": "workspacePreference",
+      "fields": [
+        {
+          "name": "data",
+          "type": "Json",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "AutomationSource",
+      "delegate": "automationSource",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "channel",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "providerLabel",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "list": false,
+          "nullable": true
+        },
+        {
+          "name": "enabled",
+          "type": "Boolean",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "AutomationEvent",
+      "delegate": "automationEvent",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "sourceId",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "externalId",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "payloadHash",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "messageHash",
+          "type": "String",
+          "list": false,
+          "nullable": true
+        },
+        {
+          "name": "reference",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "receivedAt",
+          "type": "DateTime",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "status",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "draft",
+          "type": "Json",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "issues",
+          "type": "String",
+          "list": true,
+          "nullable": false
+        },
+        {
+          "name": "duplicateOfEventId",
+          "type": "String",
+          "list": false,
+          "nullable": true
+        },
+        {
+          "name": "transactionId",
+          "type": "String",
+          "list": false,
+          "nullable": true
+        },
+        {
+          "name": "rawText",
+          "type": "String",
+          "list": false,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "RecurringSchedule",
+      "delegate": "recurringSchedule",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "transaction",
+          "type": "Json",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "startDate",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "frequency",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "active",
+          "type": "Boolean",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "archived",
+          "type": "Boolean",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "RecurringOccurrence",
+      "delegate": "recurringOccurrence",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "scheduleId",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "date",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "transactionId",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "TransactionSplit",
+      "delegate": "transactionSplit",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "originalTransactionId",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "original",
+          "type": "Json",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "partIds",
+          "type": "String",
+          "list": true,
+          "nullable": false
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "MonthlyPlan",
+      "delegate": "monthlyPlan",
+      "fields": [
+        {
+          "name": "month",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "incomePoisha",
+          "type": "BigInt",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "spendingPoisha",
+          "type": "BigInt",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "FinanceRule",
+      "delegate": "financeRule",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "active",
+          "type": "Boolean",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "priority",
+          "type": "Int",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "conditions",
+          "type": "Json",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "actions",
+          "type": "Json",
+          "list": false,
+          "nullable": false
+        }
+      ]
+    },
+    {
+      "name": "StatementImport",
+      "delegate": "statementImport",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "rows",
+          "type": "Json",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "closingDate",
+          "type": "String",
+          "list": false,
+          "nullable": true
+        },
+        {
+          "name": "closingBalancePoisha",
+          "type": "BigInt",
+          "list": false,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "RuleRun",
+      "delegate": "ruleRun",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "ruleId",
+          "type": "String",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "matchedCount",
+          "type": "Int",
+          "list": false,
+          "nullable": false
+        },
+        {
+          "name": "changedIds",
+          "type": "String",
+          "list": true,
+          "nullable": false
+        }
+      ]
+    }
+  ]
+}

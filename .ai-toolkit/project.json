@@ -1,0 +1,16 @@
+{
+  "preset": "nextjs",
+  "style": "glassmorphism",
+  "team": "small",
+  "harness": "codex",
+  "brief": "Budget Go: a simple personal budget tracker for everyday users. User-selected stack: Next.js with TypeScript; visual direction: minimal with subtle glassmorphism; small specialist team. Proposed first milestone, subject to refinement: income and expense tracking, categories, monthly budgets and an overview dashboard. Storage, authentication, currency and integrations are undecided: do not assume browser-only storage or a hosted database. Current host is DeepSeek Harness, which has no dedicated toolkit adapter; use the codex-compatible AGENTS.md and .agents/skills layout as a portable layout only, without claiming verified native skill discovery. Generate project guidance first, then implement the first useful milestone after clarifying any blocking product decisions.",
+  "audience": "Everyday users managing their personal budgets",
+  "database": "none",
+  "allow_screened": false,
+  "integrations": [],
+  "add_skills": [],
+  "remove_skills": [],
+  "capabilities": [
+    "testing"
+  ]
+}

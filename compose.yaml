@@ -1,0 +1,53 @@
+name: budget-go
+
+x-app: &app
+  image: ${BUDGET_GO_IMAGE:-ghcr.io/creativekamrul/budget-go:1.0.0-beta.1}
+  build:
+    context: .
+    dockerfile: Dockerfile
+  environment:
+    NODE_ENV: production
+    APP_URL: ${APP_URL:?Set APP_URL to the exact public origin}
+    AUTH_URL: ${APP_URL:?Set APP_URL to the exact public origin}
+    AUTH_SECRET: ${AUTH_SECRET:?Generate a private AUTH_SECRET}
+    DATABASE_URL: postgresql://budget_go:${POSTGRES_PASSWORD:?Generate a URL-safe POSTGRES_PASSWORD}@db:5432/budget_go?schema=public
+  init: true
+  security_opt:
+    - no-new-privileges:true
+
+services:
+  db:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_DB: budget_go
+      POSTGRES_USER: budget_go
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Generate a URL-safe POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U budget_go -d budget_go']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  app:
+    <<: *app
+    ports:
+      - '${BIND_ADDRESS:-127.0.0.1}:${APP_PORT:-3000}:3000'
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  migrate:
+    <<: *app
+    command: [npm, run, db:migrate]
+    profiles: [tools]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: 'no'
+
+volumes:
+  postgres_data:

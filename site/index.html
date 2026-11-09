@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Budget Go is an open-source, self-hosted personal finance workspace built for Bangladesh: manual BDT accounts, CSV statements, reviewed bank alerts, REST and MCP.">
+  <meta name="theme-color" content="#0b111b">
+  <title>Budget Go — Your money. Your system.</title>
+  <link rel="icon" href="{{BASE}}assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="{{BASE}}assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="brand" href="{{BASE}}" aria-label="Budget Go home"><span class="brand-mark">bg<span>.</span></span><span>Budget Go</span></a>
+    <nav aria-label="Main navigation"><a href="#features">Features</a><a href="#install">Install</a><a href="{{BASE}}docs/">Docs</a><a class="github-link" href="{{REPO}}">GitHub <span aria-hidden="true">↗</span></a></nav>
+  </header>
+  <main id="main">
+    <section class="hero wrap">
+      <div class="hero-copy"><a class="release-pill" href="{{REPO}}/releases/tag/v{{VERSION}}"><span></span>v{{VERSION}}<span class="release-arrow" aria-hidden="true">↗</span></a>
+        <p class="eyebrow">PERSONAL FINANCE. ON YOUR TERMS.</p><h1>Your money.<br><span>Your system.</span></h1>
+        <p class="hero-description">A clear home for your accounts, spending and plans. Built for Bangladesh, where a bank API isn’t always an option.</p>
+        <div class="hero-actions"><a class="button primary" href="#install">Start with Docker <span aria-hidden="true">→</span></a><a class="button secondary" href="{{BASE}}docs/">Explore the docs</a></div>
+        <p class="hero-facts">Self-hosted <span>·</span> BDT-first <span>·</span> MIT licensed</p>
+      </div>
+      <div class="flow-preview" aria-label="Illustration of the collect, review and record workflow">
+        <div class="preview-top"><span class="preview-logo">bg.</span><span>YOUR FINANCIAL WORKSPACE</span><span class="preview-dot"></span></div>
+        <div class="preview-intro"><p class="eyebrow">FROM A MESSAGE TO A CLEARER PICTURE</p><h2>Bring the pieces together.</h2><p>Your collector does the intake.<br>You stay in control of the ledger.</p></div>
+        <ol class="flow-steps"><li><span class="step-number">01</span><div><strong>Collect</strong><p>Bank emails, SMS or a CSV statement</p></div><span class="step-symbol" aria-hidden="true">↙</span></li><li><span class="step-number">02</span><div><strong>Review</strong><p>Check amounts, accounts and duplicates</p></div><span class="step-symbol" aria-hidden="true">✓</span></li><li><span class="step-number">03</span><div><strong>Record</strong><p>One deliberate entry. A traceable history.</p></div><span class="step-symbol" aria-hidden="true">↗</span></li></ol>
+        <div class="preview-footer"><span class="status-dot"></span>Designed for reviewed automation<span>Illustrative workflow</span></div>
+      </div>
+    </section>
+    <section class="principles wrap" aria-label="Project principles"><p><strong>Your server.</strong> Your PostgreSQL database.</p><p><strong>Exact amounts.</strong> Integer poisha, clear BDT balances.</p><p><strong>Open by design.</strong> REST, MCP and readable docs.</p></section>
+    <section id="features" class="features wrap section-space">
+      <div class="section-heading"><div><p class="eyebrow">LESS FRICTION. MORE UNDERSTANDING.</p><h2>The everyday essentials,<br>connected.</h2></div><p>Track manually today. Connect your own tools when you’re ready. Every financial change follows the same shared rules.</p></div>
+      <div class="feature-grid"><article><span class="feature-index">01 / THE FULL PICTURE</span><h3>Accounts &amp; net worth</h3><p>Eleven manual account types, including bank accounts, mobile wallets, property, loans and credit cards. Dated valuations keep income and spending separate.</p><a href="{{BASE}}docs/accounts.html">Understand your accounts <span aria-hidden="true">→</span></a></article>
+      <article><span class="feature-index">02 / THE EVERYDAY DETAILS</span><h3>Transactions &amp; plans</h3><p>Categories, tags, splits, monthly budgets and recurring schedules. Match movements between your accounts without counting them as spending.</p><a href="{{BASE}}docs/transactions.html">Explore the ledger <span aria-hidden="true">→</span></a></article>
+      <article><span class="feature-index">03 / A SECOND PAIR OF EYES</span><h3>Statements &amp; rules</h3><p>Map CSV columns, preview rows, review possible duplicates and compare closing balances. Preview classification rules before applying changes.</p><a href="{{BASE}}docs/statements.html">Bring in a statement <span aria-hidden="true">→</span></a></article></div>
+    </section>
+    <section class="automation-section section-space"><div class="wrap automation-grid"><div><p class="eyebrow">BUILT AROUND BANGLADESH</p><h2>No bank API?<br><span>Start with what you receive.</span></h2><p>Use your own n8n workflow or agent to turn bank emails and SMS into drafts. Budget Go provides the review inbox, Bangla-digit support, duplicate checks and deliberate posting.</p><a class="text-link" href="{{BASE}}docs/automation.html">Read the automation guide <span aria-hidden="true">→</span></a></div><div class="api-preview"><div class="code-heading"><span>ONE WORKSPACE. YOUR TOOLS.</span><span class="code-label">API + MCP</span></div><dl class="endpoint-list"><div><dt><span>GET</span><code>/api/v4/workspace</code></dt><dd>Read accounts and the ledger</dd></div><div><dt><span>POST</span><code>/api/v3/ingest</code></dt><dd>Stage a bank-alert draft for review</dd></div><div><dt><span>MCP</span><code>/api/mcp</code></dt><dd>Connect a client with a scoped token</dd></div></dl><a href="{{BASE}}docs/api.html">API reference <span aria-hidden="true">↗</span></a></div></div></section>
+    <section id="install" class="install wrap section-space"><div class="section-heading"><div><p class="eyebrow">A HOME ON YOUR OWN SERVER</p><h2>Two ways to Docker.</h2></div><p>Choose the database setup that fits your server. Versioned images are published to GitHub Container Registry.</p></div>
+      <div class="install-options"><article><span class="option-label">OPTION 01 <span>RECOMMENDED TO START</span></span><h3>Bring the whole stack</h3><p>Compose runs Budget Go and PostgreSQL together. A named volume keeps your database across container updates.</p><code class="file-label">compose.yaml</code><a class="button primary" href="{{BASE}}docs/docker.html#bundled-postgresql">Install with PostgreSQL <span aria-hidden="true">→</span></a></article><article><span class="option-label">OPTION 02</span><h3>Use your own database</h3><p>Run the app container against an existing PostgreSQL server. Supply your connection URL and keep database operations in your own setup.</p><code class="file-label">compose.external.yaml</code><a class="button secondary" href="{{BASE}}docs/docker.html#external-postgresql">Use external PostgreSQL <span aria-hidden="true">→</span></a></article></div>
+      <div class="pull-command"><div><span class="terminal-dot"></span><strong>Pull a specific release</strong><a href="{{REPO}}/pkgs/container/budget-go">Container packages <span aria-hidden="true">↗</span></a></div><pre><code>docker pull ghcr.io/creativekamrul/budget-go:{{VERSION}}</code></pre><p>Back up your database, review release notes, then pull and migrate before restarting. <a href="{{BASE}}docs/docker.html#upgrading">Read the upgrade guide →</a></p></div>
+    </section>
+    <section class="beta-note wrap"><div><span class="beta-badge">BETA, WITH CLEAR BOUNDARIES</span><h2>A working foundation.<br>An open roadmap.</h2></div><div><p>This beta supports manual BDT finance and reviewed imports. Live bank connections, FX, investment market prices and household sharing are not included. External collectors need your own setup.</p><p>This website is the project’s static documentation site. The private finance application runs on your own server.</p><a class="text-link" href="{{BASE}}docs/parity.html">See feature coverage and limits <span aria-hidden="true">→</span></a></div></section>
+    <section class="final-cta wrap"><p class="eyebrow">MAKE IT YOURS</p><h2>A clearer financial picture<br>starts with one place.</h2><a class="button primary" href="{{BASE}}docs/docker.html">Read the installation guide <span aria-hidden="true">→</span></a></section>
+  </main>
+  <footer class="wrap footer"><a class="brand" href="{{BASE}}"><span class="brand-mark">bg<span>.</span></span><span>Budget Go</span></a><p>Open source under the MIT license. v{{VERSION}}.</p><nav aria-label="Footer navigation"><a href="{{BASE}}docs/">Documentation</a><a href="{{REPO}}">Source code</a><a href="{{REPO}}/releases">Releases</a><a href="{{REPO}}/blob/main/LICENSE">License</a></nav></footer>
+</body>
+</html>

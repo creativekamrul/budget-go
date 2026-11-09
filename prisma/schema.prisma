@@ -1,0 +1,354 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id             String        @id @default(uuid())
+  email          String        @unique
+  name           String
+  passwordHash   String
+  active         Boolean       @default(true)
+  sessionVersion Int           @default(1)
+  revision       BigInt        @default(0)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  transactions   Transaction[]
+  budgets        Budget[]
+  tokens         ApiToken[]
+  accounts       FinancialAccount[]
+  transfers      Transfer[]
+  receipts       RequestReceipt[]
+  categories     Category[]
+  tags           Tag[]
+  merchants      Merchant[]
+  preference     WorkspacePreference?
+  automationSources AutomationSource[]
+  automationEvents AutomationEvent[]
+  recurringSchedules RecurringSchedule[]
+  recurringOccurrences RecurringOccurrence[]
+  transactionSplits TransactionSplit[]
+  monthlyPlans MonthlyPlan[]
+  balanceAdjustments BalanceAdjustment[]
+  matchedTransfers MatchedTransfer[]
+  financeRules FinanceRule[]
+  statementImports StatementImport[]
+  ruleRuns RuleRun[]
+}
+
+model Transaction {
+  userId      String
+  id          String
+  description String
+  category    String
+  date        String
+  type        String
+  poisha      BigInt
+  accountId   String?
+  categoryId  String?
+  merchantId  String?
+  notes       String @default("")
+  status      String @default("confirmed")
+  excluded    Boolean @default(false)
+  classification Category? @relation(fields: [userId, categoryId], references: [userId, id], onDelete: NoAction)
+  merchant Merchant? @relation(fields: [userId, merchantId], references: [userId, id], onDelete: NoAction)
+  tags TransactionTag[]
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  account     FinancialAccount? @relation(fields: [userId, accountId], references: [userId, id], onDelete: NoAction)
+
+  @@id([userId, id])
+  @@index([userId, date])
+  @@index([userId, accountId])
+}
+
+model FinancialAccount {
+  userId        String
+  id            String
+  name          String
+  kind          String
+  currency      String @default("BDT")
+  openingDate   String
+  openingPoisha BigInt
+  archived      Boolean @default(false)
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions  Transaction[]
+  outgoing      Transfer[] @relation("TransferFrom")
+  incoming      Transfer[] @relation("TransferTo")
+  automationSources AutomationSource[]
+  recurringSchedules RecurringSchedule[]
+  balanceAdjustments BalanceAdjustment[]
+  statementImports StatementImport[]
+
+  @@id([userId, id])
+}
+
+model Transfer {
+  userId        String
+  id            String
+  fromAccountId String
+  toAccountId   String
+  description   String
+  date          String
+  toDate        String?
+  poisha        BigInt
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fromAccount   FinancialAccount @relation("TransferFrom", fields: [userId, fromAccountId], references: [userId, id], onDelete: NoAction)
+  toAccount     FinancialAccount @relation("TransferTo", fields: [userId, toAccountId], references: [userId, id], onDelete: NoAction)
+
+  @@id([userId, id])
+  @@index([userId, date])
+  @@index([userId, fromAccountId])
+  @@index([userId, toAccountId])
+}
+
+model BalanceAdjustment {
+  userId String
+  id String
+  accountId String
+  date String
+  poisha BigInt
+  balancePoisha BigInt
+  description String
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  account FinancialAccount @relation(fields:[userId,accountId],references:[userId,id],onDelete:NoAction)
+  @@id([userId,id])
+  @@unique([userId,accountId,date])
+}
+
+model MatchedTransfer {
+  userId String
+  id String
+  transferId String
+  outgoing Json
+  incoming Json
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  @@id([userId,id])
+  @@unique([userId,transferId])
+}
+
+model FinanceRule {
+  userId String
+  id String
+  name String
+  active Boolean @default(true)
+  priority Int
+  conditions Json
+  actions Json
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  runs RuleRun[]
+  @@id([userId,id])
+}
+
+model StatementImport {
+  userId String
+  id String
+  accountId String
+  name String
+  createdAt DateTime @default(now())
+  rows Json
+  closingDate String?
+  closingBalancePoisha BigInt?
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  account FinancialAccount @relation(fields:[userId,accountId],references:[userId,id],onDelete:NoAction)
+  @@id([userId,id])
+}
+
+model RuleRun {
+  userId String
+  id String
+  ruleId String
+  createdAt DateTime @default(now())
+  matchedCount Int
+  changedIds String[]
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  rule FinanceRule @relation(fields:[userId,ruleId],references:[userId,id],onDelete:NoAction)
+  @@id([userId,id])
+}
+
+model RequestReceipt {
+  userId    String
+  requestId String
+  hash      String
+  createdAt DateTime @default(now())
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, requestId])
+}
+
+model Budget {
+  userId      String
+  id          String
+  month       String
+  category    String
+  limitPoisha BigInt
+  categoryId String?
+  classification Category? @relation(fields: [userId, categoryId], references: [userId, id], onDelete: NoAction)
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, id])
+  @@unique([userId, month, category])
+}
+
+model ApiToken {
+  id             String    @id @default(uuid())
+  userId         String
+  name           String
+  tokenHash      String    @unique
+  scopes         String[]
+  sessionVersion Int
+  expiresAt      DateTime
+  revokedAt      DateTime?
+  createdAt      DateTime  @default(now())
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}
+
+model LoginRateLimit {
+  key         String   @id
+  windowStart DateTime
+  attempts    Int
+}
+
+model Category {
+  userId String
+  id String
+  name String
+  color String
+  icon String
+  parentId String?
+  kind String
+  archived Boolean @default(false)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent Category? @relation("CategoryParent", fields: [userId, parentId], references: [userId, id], onDelete: NoAction)
+  children Category[] @relation("CategoryParent")
+  transactions Transaction[]
+  budgets Budget[]
+  @@id([userId, id])
+}
+model Tag {
+  userId String
+  id String
+  name String
+  color String
+  archived Boolean @default(false)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions TransactionTag[]
+  @@id([userId, id])
+}
+model Merchant {
+  userId String
+  id String
+  name String
+  color String
+  website String @default("")
+  archived Boolean @default(false)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+  @@id([userId, id])
+}
+model TransactionTag {
+  userId String
+  transactionId String
+  tagId String
+  transaction Transaction @relation(fields: [userId, transactionId], references: [userId, id], onDelete: Cascade)
+  tag Tag @relation(fields: [userId, tagId], references: [userId, id], onDelete: NoAction)
+  @@id([userId, transactionId, tagId])
+}
+
+model WorkspacePreference {
+  userId String @id
+  data Json
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AutomationSource {
+  userId String
+  id String
+  name String
+  channel String
+  providerLabel String
+  accountId String?
+  enabled Boolean @default(true)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  events AutomationEvent[]
+  account FinancialAccount? @relation(fields: [userId, accountId], references: [userId, id], onDelete: NoAction)
+  @@id([userId, id])
+}
+
+model AutomationEvent {
+  userId String
+  id String
+  sourceId String
+  externalId String
+  payloadHash String
+  messageHash String?
+  reference String @default("")
+  receivedAt DateTime @default(now())
+  status String
+  draft Json
+  issues String[]
+  duplicateOfEventId String?
+  transactionId String?
+  rawText String?
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  source AutomationSource @relation(fields: [userId, sourceId], references: [userId, id], onDelete: NoAction)
+  @@id([userId, id])
+  @@unique([userId, sourceId, externalId])
+  @@unique([userId, transactionId])
+  @@index([userId, receivedAt])
+}
+
+model RecurringSchedule {
+  userId String
+  id String
+  name String
+  accountId String
+  transaction Json
+  startDate String
+  frequency String
+  active Boolean @default(true)
+  archived Boolean @default(false)
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  account FinancialAccount @relation(fields:[userId,accountId],references:[userId,id],onDelete:NoAction)
+  occurrences RecurringOccurrence[]
+  @@id([userId,id])
+}
+
+model RecurringOccurrence {
+  userId String
+  id String
+  scheduleId String
+  date String
+  transactionId String
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  schedule RecurringSchedule @relation(fields:[userId,scheduleId],references:[userId,id],onDelete:NoAction)
+  @@id([userId,id])
+  @@unique([userId,scheduleId,date])
+  @@unique([userId,transactionId])
+}
+
+model TransactionSplit {
+  userId String
+  id String
+  originalTransactionId String
+  original Json
+  partIds String[]
+  createdAt DateTime @default(now())
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  @@id([userId,id])
+  @@unique([userId,originalTransactionId])
+}
+
+model MonthlyPlan {
+  userId String
+  month String
+  incomePoisha BigInt
+  spendingPoisha BigInt
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  @@id([userId,month])
+}

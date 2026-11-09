@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 4,
+  "toolkitVersion": "0.4.0",
+  "preset": "nextjs",
+  "style": "glassmorphism",
+  "harness": "codex",
+  "skills": [
+    "block-testing-strategy",
+    "design-foundations",
+    "frontend-implementation"
+  ],
+  "adaptations": [],
+  "files": [
+    {
+      "path": ".agents/skills/block-testing-strategy/SKILL.md",
+      "sha256": "8cc22cbd58152079c5e37304e2984fb0310794674a862f317bd2ee074cd171fc"
+    },
+    {
+      "path": ".agents/skills/block-testing-strategy/TOOLKIT-PROVENANCE.json",
+      "sha256": "7f70964a7f97c7c11b99a5198010bac18c60d36bdfc3f8ebe5bc5e4ad074ef7e"
+    },
+    {
+      "path": ".agents/skills/block-testing-strategy/TOOLKIT-UPSTREAM-LICENSE.txt",
+      "sha256": "998dffd7be3657b8ba872cce9dc56b1b382d647e27c890498cc81f3408400194"
+    },
+    {
+      "path": ".agents/skills/design-foundations/LICENSE.txt",
+      "sha256": "ecc0ddc6de64569c917fa3a650471a6ecbd89be81270818ac2a174317d52020b"
+    },
+    {
+      "path": ".agents/skills/design-foundations/SKILL.md",
+      "sha256": "d98875503510e6f07a9cfdc743c990a43acac0b3c1337fdde3832395700127f6"
+    },
+    {
+      "path": ".agents/skills/frontend-implementation/LICENSE.txt",
+      "sha256": "ecc0ddc6de64569c917fa3a650471a6ecbd89be81270818ac2a174317d52020b"
+    },
+    {
+      "path": ".agents/skills/frontend-implementation/SKILL.md",
+      "sha256": "545c3a21bbcfd2d3b84040f105b80090336382c4bb67fd08a08c1118735cece8"
+    },
+    {
+      "path": ".ai-team/TEAM.md",
+      "sha256": "ecb86693cecf56067d771b7dd0f48e93bb056e465c306ba3c653cd56d890cc70"
+    },
+    {
+      "path": ".ai-team/roles/builder.md",
+      "sha256": "be364c248cbbb1bd4f24dc0824908fe751a27295f9302cfc4af3aef0c16605d4"
+    },
+    {
+      "path": ".ai-team/roles/designer.md",
+      "sha256": "effb6a1fcfd7da5471e9566238b60e690145b48fbd215abaa40378127a0eb01f"
+    },
+    {
+      "path": ".ai-team/roles/planner.md",
+      "sha256": "27d419c14f504627224a974971882cdd7c0a2d6603c7b76107c6c7a819636288"
+    },
+    {
+      "path": ".ai-team/roles/reviewer.md",
+      "sha256": "3b9a3ef54326daf76785034a030e8856c7aaae9c64f857b28116f50eb8546f75"
+    },
+    {
+      "path": ".ai-toolkit/base/AGENTS.md",
+      "sha256": "66a738a0083feaeed2f1bf116e52ce5384d4d738fe51471c79683402b34933d9"
+    },
+    {
+      "path": ".ai-toolkit/catalog.json",
+      "sha256": "fea2d063bef83db6077504fea52395dad8e7278c0d37955841459db3e67bc957"
+    },
+    {
+      "path": ".ai-toolkit/project.json",
+      "sha256": "81d276805b0cf45fd4e56ae600f9aa2d2ee951514cf32caf27f23807f60bcaf2"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "a9b00feda8ddb8f4d20fce9b7add7145c61a3849fe3ad9f2d8cc0ca43a359037"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "66a738a0083feaeed2f1bf116e52ce5384d4d738fe51471c79683402b34933d9"
+    },
+    {
+      "path": "docs/AI-TOOLKIT.md",
+      "sha256": "e7b4259bbbe8dd76874c4a205574f15931d57112e7aeb4514d1a97ee20f0bb2d"
+    },
+    {
+      "path": "docs/DESIGN-CONTRACT.md",
+      "sha256": "4324396a16c4233b7bfbba2369a0a31036a7403abf4765a9d6b665174549960d"
+    },
+    {
+      "path": "docs/HANDOFF.md",
+      "sha256": "2e2a0a6df671a902526e560bd3cba974cff3974e75fa8adc9025a3124901206e"
+    },
+    {
+      "path": "docs/PROJECT-BRIEF.md",
+      "sha256": "fec24b6596cd4f1b928d4200a04d55b963ce9ce89f10fbe8792fe3f7f80f0f01"
+    },
+    {
+      "path": "docs/QUALITY-CHECKS.md",
+      "sha256": "2b300fd3b2d544c10b775fa79eb606f35e2e8ff78f04674aeb046a8e7e2e480d"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "name": "Budget Go — stage a bank alert for review",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "d705c16c-79b2-47ba-a651-3c0b83ec7801",
+      "name": "Manual test",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Replace sourceId before running. Use a collector's stable message ID in production.\nconst sourceId = 'YOUR_SOURCE_ID';\nif (sourceId === 'YOUR_SOURCE_ID') throw new Error('Configure your Budget Go source ID and HTTP node URL/credential before running.');\nreturn [{json: {sourceId, externalId: 'synthetic-alert-0001', rawText: 'Tk 125.50 debited on 08-11-2026. Ref BGDEMO001.'}}];"
+      },
+      "id": "d705c16c-79b2-47ba-a651-3c0b83ec7802",
+      "name": "Example event — configure first",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [260, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://YOUR_APPLICATION_ORIGIN.invalid/api/v3/ingest",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": { "timeout": 30000 }
+      },
+      "id": "d705c16c-79b2-47ba-a651-3c0b83ec7803",
+      "name": "Stage in Budget Go inbox",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [540, 0],
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "SELECT_YOUR_CREDENTIAL",
+          "name": "Select your private Budget Go bearer credential"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Manual test": { "main": [[{ "node": "Example event — configure first", "type": "main", "index": 0 }]] },
+    "Example event — configure first": { "main": [[{ "node": "Stage in Budget Go inbox", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1", "timezone": "Asia/Dhaka" },
+  "pinData": {},
+  "tags": []
+}

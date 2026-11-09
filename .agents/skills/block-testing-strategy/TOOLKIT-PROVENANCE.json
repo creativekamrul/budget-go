@@ -1,0 +1,19 @@
+{
+  "source": "https://github.com/block/agent-skills",
+  "revision": "329a55d1500748a0a48d64629757cbe2622e34bf",
+  "upstreamPath": "testing-strategy/SKILL.md",
+  "license": "Apache-2.0",
+  "licenseEvidence": "LICENSE",
+  "upstreamEntrypointSha256": "ad2e2e86a1d4abe34a4ffac0fc11153ceecb24fefd313a85577ea4a8ebdc7352",
+  "localChanges": [
+    "Namespaced discovery name",
+    "Replace assumed npm commands with project-specific test discovery",
+    "Replaced generic test-writing advice with stack-specific evidence selection; removed arbitrary coverage and assertion targets"
+  ],
+  "review": {
+    "status": "reviewed",
+    "scope": "Complete instruction review; no executable files. Adapted runner selection across stacks; behavior scenarios recorded in toolkit validation.",
+    "executableFiles": [],
+    "flags": []
+  }
+}

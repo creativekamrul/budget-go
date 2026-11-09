@@ -1,0 +1,22 @@
+# Finance completion increment review
+
+## Implemented scope
+
+Financial accounts now distinguish assets and liabilities and support dated explicit balance adjustments. Reviewed entry pairs can be matched into an internal transfer and restored with their original identities. Statements stage mapped CSV rows before an explicit import or existing-entry link; their reported closing balances are compared with the live ledger without hidden adjustments. Reusable transaction rules offer a read-only preview and explicit selected application. Profile, password/session controls and owner-scoped full backup/restore complete this increment.
+
+Workbench mutations share the owner's revision, row lock and request receipt mechanism with financial mutations. Statement imports retain stable row-to-transaction links even after a linked entry is deliberately deleted. Duplicate acceptance names selected row IDs. Rule actions change classification, notes and report inclusion; they cannot change amounts, accounts or dates. Stored statement/rule JSON and owned references are validated during snapshot reads and full restore validation.
+
+## Actual evidence
+
+- Finance pure tests: six groups passed. Finance service acceptance: seven groups passed against the guarded disposable PostgreSQL database. The finance agent also reports forty service groups passed across the new suite and legacy workspace, classification, core and automation suites.
+- Workbench pure tests: seven groups passed, covering quoted CSV/BOM/newlines, UTF-8 and row caps, exact Bangla/taka amounts, explicit date/debit/credit mapping, duplicate identity, literal AND rules and bounded commands.
+- Workbench service acceptance: eight groups passed against the guarded disposable database. Coverage includes staging without financial writes; concurrent same-request replay; deleted linked-entry retention; explicit duplicate IDs; exact existing-entry linking; live closing comparison; metadata-only rule application; stale/paused/foreign refusal; corrupt JSON and owner-reference rejection. Exact generated fixture rows were cleaned afterward.
+- Platform service acceptance: five groups passed, as reported by the lead. Main lint, TypeScript and Prisma schema validation passed. Workbench targeted lint and TypeScript also passed after its final contract changes.
+- Final production build, lint/typecheck, Prisma generate/validate, unit57 and pure/official-SDK12 passed. Guarded service suites total53 groups. Platform restoration passed with all20 models nonempty, full table/domain equality, unchanged tenantB, malformed-reference/kind/privacy rollback and shared security/restore throttling.
+- Final production HTTP/MCP24 groups passed: workspace8, core4, automation5 and workbench7. They cover all three workbench tools, cross-transport replay, read-only scopes, ownership and browser-only profile/security/backup plus Origin boundaries.
+- Final production browser8 groups passed: accounts/valuation, dated match/unmatch, CSV stage/import/reconcile, rule preview/apply, profile/full restore with committed-but-lost response and exact retry,360/768/1440 geometry/44px controls, actual phone CSV/rule/restore forms with16px inputs, password invalidation/sign-out. No page errors. Root and Designer inspected actual captures. Subsequent user screenshot corrections passed fresh lint/typecheck/build and actual main-browser checks:96px rail and label inset,10px account balance inset, matching46px Merchant/Status heights/top at desktop/tablet, stacked equal-width phone controls. See artifacts/ui-fixes/results.json and actual JPEG captures; no financial write was performed.
+- Reviewed additive migrations deployed with original financial-record/link/revision/session fingerprints unchanged. Main public4 and read-only schema checks passed. Isolated server/database/configuration/browser cleaned. See HANDOFF.md and artifacts/finish/*-results.json.
+
+## Limits
+
+This is bounded local application acceptance, not certification of full Sure feature parity or arbitrary external n8n/MCP clients. Rules run only when explicitly applied. Statement import accepts CSV, not PDF/OCR or remote URLs. Closing comparisons can change after backdated ledger edits. Supported per-command/snapshot limits are intentional and documented in the API contract. Alerts and automatic bank connections remain deferred. Assistive-technology, physical-print, true 200% zoom and operator disaster recovery remain separately unverified.
