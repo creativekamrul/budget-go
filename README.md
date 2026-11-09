@@ -14,6 +14,8 @@ Use Docker Engine/Desktop with Compose v2. Choose one database option. The image
 docker pull ghcr.io/creativekamrul/budget-go:1.0.0-beta.1
 ```
 
+For Linux AMD64, the [release](https://github.com/creativekamrul/budget-go/releases/tag/v1.0.0-beta.1) also includes a downloadable Docker image and SHA256 checksums. Verify and load the archive with `docker load --input budget-go-linux-amd64-1.0.0-beta.1.tar.gz`, then follow either option below. This path needs no registry login; see the [download instructions](docs/developer/docker.md#downloadable-image-linux-amd64).
+
 ### Option A: bundled PostgreSQL
 
 ```sh

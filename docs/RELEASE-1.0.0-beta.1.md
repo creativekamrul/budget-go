@@ -12,6 +12,16 @@ docker pull ghcr.io/creativekamrul/budget-go:1.0.0-beta.1
 
 The public website hosts documentation only. The authenticated app and its database run on your server. Configure private secrets, run the explicit migrations and provision your own login; no shared default credentials or financial records are seeded.
 
+### Download the image without a registry login
+
+The attached `budget-go-linux-amd64-1.0.0-beta.1.tar.gz` is a downloadable copy of the tested Linux AMD64 image. Verify it against `SHA256SUMS.txt`, then load it:
+
+```sh
+docker load --input budget-go-linux-amd64-1.0.0-beta.1.tar.gz
+```
+
+This restores the versioned tag used by both Compose options. Continue the installation guide without the `pull` step. The archive includes no database, account records or deployment secrets; private configuration is supplied when you start the containers. This provides an alternative when registry access is unavailable. ARM64 is available through the multi-architecture registry image, not this AMD64 archive.
+
 ## Included
 
 - Manual assets/debts, net worth and dated balance adjustments.

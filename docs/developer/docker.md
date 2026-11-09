@@ -9,6 +9,18 @@ Budget Go has two independent Docker Compose options. Both run the same versione
 
 Use Docker Engine/Desktop with Linux containers and Docker Compose v2. The commands below use a POSIX shell; Windows users can use PowerShell for the Compose commands and `Copy-Item` instead of `cp`. Never publish your private environment files, database dumps or full application backup files.
 
+## Downloadable image (Linux AMD64)
+
+The [beta release](https://github.com/creativekamrul/budget-go/releases/tag/v1.0.0-beta.1) also provides `budget-go-linux-amd64-1.0.0-beta.1.tar.gz` and SHA256 checksums. This is a copy of the tested image, without database or account data. It works with both Compose options and requires no registry login:
+
+```sh
+curl -fL -o budget-go-image.tar.gz https://github.com/creativekamrul/budget-go/releases/download/v1.0.0-beta.1/budget-go-linux-amd64-1.0.0-beta.1.tar.gz
+# Check the file against the release's SHA256SUMS.txt before loading.
+docker load --input budget-go-image.tar.gz
+```
+
+In Windows PowerShell use `curl.exe` to download the binary file; do not pass binary image data through older PowerShell pipelines. Loading restores the exact version tag used by Compose. Follow either installation below, omitting its `pull` step and keeping the loaded `1.0.0-beta.1` image tag. This archive contains Linux AMD64 only; registry builds additionally target ARM64. A downloaded archive is distinct from a PostgreSQL backup.
+
 ## Bundled PostgreSQL
 
 Download the release source or clone the repository, then work in its root directory:
